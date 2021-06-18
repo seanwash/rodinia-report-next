@@ -22,8 +22,11 @@ export default function Share() {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     mutation.mutate(event, {
-      onSuccess: () => {
+      onSuccess: (...args) => {
         router.push("/");
+      },
+      onError: (error) => {
+        console.error(error);
       },
     });
   };
@@ -38,7 +41,7 @@ export default function Share() {
 
       {mutation.isError && (
         <div className="p-3 bg-red-600 text-white rounded-sm shadow-sm mb-4">
-          {mutation.error as string}
+          Error: This story could not be shared.
         </div>
       )}
 
