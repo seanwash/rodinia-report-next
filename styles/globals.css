@@ -1,16 +1,29 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+@tailwind base;
+@tailwind components;
+
+/* Components */
+
+.twc-input {
+    @apply bg-white text-left appearance-none block w-full px-3 py-2 border border-gray-300 rounded-sm shadow-sm placeholder-gray-400 focus:outline-none focus:ring-el-paso focus:border-el-paso sm:text-sm;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+.twc-select {
+    @apply bg-white text-left appearance-none block w-full px-3 py-2 border border-gray-300 rounded-sm shadow-sm placeholder-gray-400 focus:outline-none focus:ring-el-paso focus:border-el-paso sm:text-sm;
 }
 
-* {
-  box-sizing: border-box;
+.twc-select-dropdown {
+    @apply absolute bg-white p-4 mt-1 shadow rounded-sm border border-el-paso sm:text-sm;
 }
+
+.twc-checkbox {
+    @apply h-4 w-4 text-el-paso bg-white border border-el-paso shadow-sm focus:ring-el-paso-600 rounded-sm;
+}
+
+.twc-button {
+    @apply appearance-none flex justify-center py-2 px-4 border border-transparent rounded-sm shadow-sm text-sm font-medium text-alabaster bg-el-paso hover:bg-el-paso-600 focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-el-paso-600;
+}
+
+/* End Components */
+
+@tailwind utilities;
+@tailwind screens;
