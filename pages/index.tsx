@@ -7,6 +7,12 @@ export default function Home() {
     <>
       <Head>
         <title>The Rodinia Report</title>
+        <meta property="og:title" content="The Rodinia Report" key="title" />
+        <meta
+          property="og:description"
+          content="The Rodinia Report is a public curation of environmentally focused articles that helps individuals easily stay up to date on the most recent and most inspiring undertakings around the world."
+          key="description"
+        />
       </Head>
 
       <div className="container mx-auto sm:flex items-center justify-between">
