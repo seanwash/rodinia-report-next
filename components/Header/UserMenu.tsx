@@ -1,5 +1,3 @@
-// noinspection HtmlUnknownTarget
-
 import Link from "next/link";
 import { useAuth } from "../../contexts/AuthUser";
 
