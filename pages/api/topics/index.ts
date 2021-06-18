@@ -1,17 +1,17 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { db } from "../../../lib/db";
+import nc from "next-connect";
 
 interface Data {}
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Data>
-) {
+const handler = nc<NextApiRequest, NextApiResponse>().get(async (req, res) => {
   const topics = await db.topic.findMany({
     orderBy: {
       name: "asc",
     },
   });
 
-  res.status(200).json({ topics });
-}
+  return res.json({ topics });
+});
+
+export default handler;
