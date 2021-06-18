@@ -4,17 +4,22 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "build": "npx migrate:deploy && next build",
+    "start": "next start --port ${PORT-3000}",
+    "lint": "next lint",
+    "migrate:dev": "prisma migrate dev --preview-feature",
+    "migrate:deploy": "prisma migrate deploy --preview-feature",
+    "migrate:status": "prisma migrate status --preview-feature"
   },
   "dependencies": {
+    "@prisma/client": "^2.25.0",
     "firebase": "^8.6.8",
     "firebaseui": "^4.8.0",
     "next": "11.0.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-firebaseui": "^5.0.2"
+    "react-firebaseui": "^5.0.2",
+    "react-query": "^3.17.2"
   },
   "devDependencies": {
     "@types/react": "17.0.11",
@@ -23,6 +28,7 @@
     "eslint-config-next": "11.0.0",
     "postcss": "^8.3.5",
     "prettier": "^2.3.1",
+    "prisma": "^2.25.0",
     "tailwindcss": "^2.2.0",
     "typescript": "4.3.4"
   }

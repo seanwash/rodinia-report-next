@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Head from "next/head";
+import StoryList from "../components/StoryList/StoryList";
 
 export default function Home() {
   return (
@@ -26,14 +27,7 @@ export default function Home() {
         </div>
       </div>
 
-      <ul className="bg-alabaster-300 shadow-sm rounded-sm divide-y divide-alabaster mt-8">
-        <li>todo: story list</li>
-        {/*{stories?.map((story) => (*/}
-        {/*    <li key={story.id}>*/}
-        {/*        <StoryListItem story={story} />*/}
-        {/*    </li>*/}
-        {/*))}*/}
-      </ul>
+      <StoryList />
     </>
   );
 }
