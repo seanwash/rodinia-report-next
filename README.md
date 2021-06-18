@@ -1,4 +1,16 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# The Rodinia Report
+
+A public curation of environmentally focused articles that helps individuals easily stay up to date on the most recent
+and most inspiring undertakings around the world.
+
+## Road map
+
+It's still early days for Rodinia, so we don't have a formal road map just yet, but we're keeping track of a number of
+items that are needed to reach MVP status [here](https://github.com/seanwash/rodinia-report-next/projects/1).
+
+## Development
+
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) and TypeScript.
 
 ## Getting Started
 
