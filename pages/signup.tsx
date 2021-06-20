@@ -1,6 +1,7 @@
 import { FormEvent } from "react";
 import useSignUp from "../hooks/useSignUp";
 import { useRouter } from "next/router";
+import withSession from "../lib/session";
 
 export default function SignUp() {
   const mutation = useSignUp();
@@ -60,3 +61,13 @@ export default function SignUp() {
     </div>
   );
 }
+
+export const getServerSideProps = withSession(async ({ req }) => {
+  const user = req.session.get("user");
+
+  if (user) {
+    return { redirect: { destination: "/", permanent: false } };
+  }
+
+  return { props: {} };
+});
