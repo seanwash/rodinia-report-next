@@ -36,8 +36,7 @@ handler.use(mult.none()).post(async (req, res) => {
         sourceTitle: params.get("title")!,
         sourceUrl: params.get("sourceUrl")!,
         sourcePaywalled: false,
-        // TODO: Get real user id
-        userId: "123",
+        userId: params.get("userId")!,
         createdAt: new Date(),
         updatedAt: new Date(),
         topics: {

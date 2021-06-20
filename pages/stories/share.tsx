@@ -5,10 +5,9 @@ import useCreateStory from "../../hooks/useCreateStory";
 import { useRouter } from "next/router";
 import useFetchUrlMetadata from "../../hooks/useFetchUrlMetadata";
 import { FormEvent, useEffect, useState } from "react";
-import useUser from "../../hooks/useUser";
+import withSession from "../../lib/session";
 
-export default function Share() {
-  const { user, isLoading } = useUser({ redirectTo: "/login" });
+export default function Share({ user }) {
   const [url, setUrl] = useState<string>("");
   const [title, setTitle] = useState<string>("");
   const router = useRouter();
@@ -30,10 +29,6 @@ export default function Share() {
     });
   };
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <>
       <Head>
@@ -49,7 +44,7 @@ export default function Share() {
       )}
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        <input type="hidden" value={user.id} />
+        <input type="hidden" name="userId" value={user.id} />
         <div>
           <input
             id="sourceUrl"
@@ -134,3 +129,15 @@ export default function Share() {
     </>
   );
 }
+
+export const getServerSideProps = withSession(async ({ req }) => {
+  const user = req.session.get("user");
+
+  if (user === undefined) {
+    return { redirect: { destination: "/login", permanent: false } };
+  }
+
+  return {
+    props: { user },
+  };
+});
