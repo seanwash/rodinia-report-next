@@ -5,8 +5,10 @@ import useCreateStory from "../../hooks/useCreateStory";
 import { useRouter } from "next/router";
 import useFetchUrlMetadata from "../../hooks/useFetchUrlMetadata";
 import { FormEvent, useEffect, useState } from "react";
+import useUser from "../../hooks/useUser";
 
 export default function Share() {
+  const { user, isLoading } = useUser({ redirectTo: "/login" });
   const [url, setUrl] = useState<string>("");
   const [title, setTitle] = useState<string>("");
   const router = useRouter();
@@ -22,14 +24,15 @@ export default function Share() {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     mutation.mutate(event, {
-      onSuccess: (...args) => {
+      onSuccess: () => {
         router.push("/");
-      },
-      onError: (error) => {
-        console.error(error);
       },
     });
   };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
@@ -37,7 +40,7 @@ export default function Share() {
         <title>Share a Story</title>
       </Head>
 
-      <h2 className="text-2xl leading-7 mb-4">Submit Story</h2>
+      <h1 className="text-2xl leading-7 mb-4">Submit Story</h1>
 
       {mutation.isError && (
         <div className="p-3 bg-red-600 text-white rounded-sm shadow-sm mb-4">
@@ -46,6 +49,7 @@ export default function Share() {
       )}
 
       <form onSubmit={handleSubmit} className="space-y-4">
+        <input type="hidden" value={user.id} />
         <div>
           <input
             id="sourceUrl"

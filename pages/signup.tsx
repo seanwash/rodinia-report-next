@@ -21,7 +21,7 @@ export default function SignUp() {
 
       {mutation.isError && (
         <div className="p-3 bg-red-600 text-white rounded-sm shadow-sm mb-4">
-          {mutation.error.message}
+          Error: {mutation.error.message}
         </div>
       )}
 

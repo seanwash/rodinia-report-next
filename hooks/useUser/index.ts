@@ -2,10 +2,15 @@ import { useEffect } from "react";
 import Router from "next/router";
 import { useQuery } from "react-query";
 
+interface UseUserProps {
+  redirectTo?: string | boolean;
+  redirectIfFound?: string | boolean;
+}
+
 export default function useUser({
   redirectTo = false,
   redirectIfFound = false,
-} = {}) {
+}: UseUserProps = {}) {
   const { data: user, isLoading } = useQuery(["api", "viewer"], async () => {
     const request = await fetch("/api/viewer");
     return await request.json();
