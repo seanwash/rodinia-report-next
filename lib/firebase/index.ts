@@ -1,15 +1,28 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 
-const FirebaseCredentials = {
+const config = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_PUBLIC_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
   projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
 };
 
 // Don't re-initialize if an app has already been initialized.
-if (!firebase.apps.length) {
-  firebase.initializeApp(FirebaseCredentials);
+if (firebase.apps.length === 0) {
+  firebase.initializeApp(config);
+  firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
+
+  // @ts-ignore
+  // if (process.env.NODE_ENV === "development") {
+  //   // NOTE: disableWarnings hides a banner added to the page that warns when the
+  //   // auth emulator is being used. It can be disabled as below, but TS doesn't
+  //   // seem to know about the config options that can be passed in.
+  //   firebase
+  //     .auth()
+  //     // @ts-ignore
+  //     .useEmulator("http://localhost:9099", { disableWarnings: true });
+  //   firebase.firestore().useEmulator("localhost", 8080);
+  // }
 }
 
 export default firebase;

@@ -1,24 +1,31 @@
 import Link from "next/link";
-import { useAuth } from "../../contexts/AuthUser";
+import useUser from "../../hooks/useUser";
+import useSignOut from "../../hooks/useLogout";
 
 const Nav: React.FC = ({ children }) => <nav>{children}</nav>;
 
 const UserMenu = () => {
-  const { authUser, loading, signOut } = useAuth();
+  const { user, isLoading } = useUser();
+  const mutation = useSignOut();
 
-  if (loading) {
+  if (isLoading) {
     return <Nav>...</Nav>;
   }
 
   return (
     <Nav>
-      {authUser ? (
-        <button type="button" onClick={signOut}>
+      {user.isLoggedIn ? (
+        <button
+          disabled={mutation.isLoading}
+          type="button"
+          onClick={() => mutation.mutate()}
+        >
           Sign Out
         </button>
       ) : (
         <>
-          <Link href="/signin">Sign In</Link>
+          <Link href="/login">Log In</Link> /{" "}
+          <Link href="/signup">Sign Up</Link>
         </>
       )}
     </Nav>

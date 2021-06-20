@@ -10,13 +10,13 @@ const queryClient = new QueryClient();
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthUserProvider>
-        <Header />
-        <main className="container mx-auto p-4">
-          <Component {...pageProps} />
-        </main>
-        <ReactQueryDevtools initialIsOpen={false} />
-      </AuthUserProvider>
+      {/*<AuthUserProvider>*/}
+      <Header />
+      <main className="container mx-auto p-4">
+        <Component {...pageProps} />
+      </main>
+      <ReactQueryDevtools initialIsOpen={false} />
+      {/*</AuthUserProvider>*/}
     </QueryClientProvider>
   );
 }

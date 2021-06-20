@@ -2,7 +2,7 @@ import Link from "next/link";
 import Head from "next/head";
 import StoryList from "../components/StoryList/StoryList";
 
-export default function Home() {
+const Home = () => {
   return (
     <>
       <Head>
@@ -36,4 +36,6 @@ export default function Home() {
       <StoryList />
     </>
   );
-}
+};
+
+export default Home;

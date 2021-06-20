@@ -18,7 +18,6 @@ handler.get(async (req, res) => {
     const { result } = await scraper({ url: url as string });
     return res.json({ metadata: result });
   } catch (e) {
-    console.log("catch --------", "scrape", e);
     return res.status(500).json(e);
   }
 });

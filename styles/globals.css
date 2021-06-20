@@ -23,6 +23,10 @@
     @apply appearance-none flex justify-center py-2 px-4 border border-transparent rounded-sm shadow-sm text-sm font-medium text-alabaster bg-el-paso hover:bg-el-paso-600 focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-el-paso-600;
 }
 
+.twc-button:disabled {
+    @apply opacity-50;
+}
+
 /* End Components */
 
 @tailwind utilities;
