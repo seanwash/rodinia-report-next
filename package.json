@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npx migrate:deploy && next build",
+    "build": "npm run migrate:deploy && next build",
     "start": "next start --port ${PORT-3000}",
     "lint": "next lint",
     "migrate:dev": "prisma migrate dev --preview-feature",
