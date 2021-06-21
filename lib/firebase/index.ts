@@ -13,16 +13,9 @@ if (firebase.apps.length === 0) {
   firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
 
   // @ts-ignore
-  // if (process.env.NODE_ENV === "development") {
-  //   // NOTE: disableWarnings hides a banner added to the page that warns when the
-  //   // auth emulator is being used. It can be disabled as below, but TS doesn't
-  //   // seem to know about the config options that can be passed in.
-  //   firebase
-  //     .auth()
-  //     // @ts-ignore
-  //     .useEmulator("http://localhost:9099", { disableWarnings: true });
-  //   firebase.firestore().useEmulator("localhost", 8080);
-  // }
+  if (process.env.FIREBASE_EMULATOR === "true") {
+    firebase.auth().useEmulator("http://localhost:9099");
+  }
 }
 
 export default firebase;
