@@ -2,6 +2,7 @@ import { FormEvent } from "react";
 import useSignUp from "../hooks/useSignUp";
 import { useRouter } from "next/router";
 import withSession from "../lib/session";
+import Head from "next/head";
 
 export default function SignUp() {
   const mutation = useSignUp();
@@ -17,7 +18,11 @@ export default function SignUp() {
   }
 
   return (
-    <div>
+    <>
+      <Head>
+        <title>Sign Up</title>
+      </Head>
+
       <h1 className="text-2xl leading-7 mb-4">Create an Account</h1>
 
       {mutation.isError && (
@@ -58,7 +63,7 @@ export default function SignUp() {
           </button>
         </div>
       </form>
-    </div>
+    </>
   );
 }
 
