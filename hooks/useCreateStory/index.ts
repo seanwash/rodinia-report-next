@@ -14,7 +14,7 @@ export default function useCreateStory() {
       });
 
       if (!response.ok) {
-        throw new Error(await response.text());
+        throw new Error(await response.json());
       }
 
       return response.json();
