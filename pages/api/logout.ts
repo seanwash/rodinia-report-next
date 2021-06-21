@@ -1,6 +1,5 @@
 import withSession from "../../lib/session";
-import firebase from "firebase/app";
-import "firebase/auth";
+import firebase from "../../lib/firebase";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Session } from "next-iron-session";
 
