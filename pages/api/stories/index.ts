@@ -16,6 +16,9 @@ export const config = {
 const handler = nc<NextApiRequest, NextApiResponse>();
 
 handler.get(async (req, res) => {
+  const page = typeof req.query.page === "string" ? parseInt(req.query.page) : 0;
+  const storiesPerPage = 4;
+
   const stories = await db.story.findMany({
     orderBy: {
       createdAt: "desc",
@@ -23,9 +26,14 @@ handler.get(async (req, res) => {
     include: {
       topics: true,
     },
+    take: storiesPerPage,
+    skip: page * storiesPerPage,
   });
 
-  return res.json({ stories });
+  const storiesCount = await db.story.count();
+  const pages = Math.ceil(storiesCount / storiesPerPage);
+
+  return res.json({ stories, pages });
 });
 
 handler.use(mult.none()).post(async (req, res) => {
