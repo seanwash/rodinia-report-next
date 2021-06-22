@@ -1,22 +1,9 @@
 import useFetchStories from "../../hooks/useFetchStories";
 import StoryListItem from "../StoryListItem";
-import queryString from "query-string";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const StoryList: React.FC = () => {
   const [page, setPage] = useState(0);
-
-  // Not sure if we want to use query params to save page — could get copied by
-  // the user and would bring them to that page instead of the beginning.
-  // Another option could be to use storage.
-  useEffect(() => {
-    const queryObj = queryString.parse(window.location.search);
-      if (queryObj.page && typeof queryObj.page === "string") {
-        setPage(parseInt(queryObj.page));
-      } 
-    }
-  ), [];
-
   const { data, isLoading, isError } = useFetchStories(page);
 
   if (isLoading) {
