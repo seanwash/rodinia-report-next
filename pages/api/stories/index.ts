@@ -1,17 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import nc from "next-connect";
-import multer from "multer";
 import { db } from "../../../lib/db";
 
 interface Data {}
-
-const mult = multer();
-
-export const config = {
-  api: {
-    bodyParser: false, // Disallow body parsing, consume as stream
-  },
-};
 
 const handler = nc<NextApiRequest, NextApiResponse>();
 
@@ -28,29 +19,21 @@ handler.get(async (req, res) => {
   return res.json({ stories });
 });
 
-handler.use(mult.none()).post(async (req, res) => {
+handler.post(async (req, res) => {
   try {
-    const params = new URLSearchParams(req.body);
-
-    console.log(
-      "--------",
-      "createStory",
-      params.get("title"),
-      params.get("sourceUrl"),
-      params.getAll("topicId"),
-      params.getAll("topicId").map((id) => ({ id: Number(id) }))
-    );
+    // TODO: Would be nice to validate the incoming data.
+    const { story: storyData } = JSON.parse(req.body);
 
     const story = await db.story.create({
       data: {
-        sourceTitle: params.get("title")!,
-        sourceUrl: params.get("sourceUrl")!,
+        sourceTitle: storyData.sourceTitle,
+        sourceUrl: storyData.sourceUrl,
         sourcePaywalled: false,
-        userId: params.get("userId")!,
+        userId: storyData.userId,
         createdAt: new Date(),
         updatedAt: new Date(),
         topics: {
-          connect: params.getAll("topicId").map((id) => ({ id: Number(id) })),
+          connect: storyData.topicIds.map((id: string) => ({ id: Number(id) })),
         },
       },
     });
