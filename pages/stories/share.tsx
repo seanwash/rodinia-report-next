@@ -5,9 +5,9 @@ import useCreateStory from "../../hooks/useCreateStory";
 import { useRouter } from "next/router";
 import useFetchUrlMetadata from "../../hooks/useFetchUrlMetadata";
 import { FormEvent, useEffect, useState } from "react";
-import withSession from "../../lib/session";
+import withSession, { NextIronRequest } from "../../lib/session";
 
-export default function Share({ user }) {
+export default function Share() {
   const [url, setUrl] = useState<string>("");
   const [title, setTitle] = useState<string>("");
   const router = useRouter();
@@ -44,7 +44,6 @@ export default function Share({ user }) {
       )}
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        <input type="hidden" name="userId" value={user.id} />
         <div>
           <input
             id="sourceUrl"
@@ -130,14 +129,16 @@ export default function Share({ user }) {
   );
 }
 
-export const getServerSideProps = withSession(async ({ req }) => {
-  const user = req.session.get("user");
+export const getServerSideProps = withSession(
+  async ({ req }: { req: NextIronRequest }) => {
+    const user = req.session.get("user");
 
-  if (user === undefined) {
-    return { redirect: { destination: "/login", permanent: false } };
+    if (user === undefined) {
+      return { redirect: { destination: "/login", permanent: false } };
+    }
+
+    return {
+      props: {},
+    };
   }
-
-  return {
-    props: { user },
-  };
-});
+);
