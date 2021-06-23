@@ -31,6 +31,15 @@ handler.get(async (req, res) => {
 handler.use(mult.none()).post(async (req, res) => {
   try {
     const params = new URLSearchParams(req.body);
+
+    console.log(
+      "--------",
+      "createStory",
+      params.get("title"),
+      params.get("sourceUrl"),
+      params.getAll("topicId")
+    );
+
     const story = await db.story.create({
       data: {
         sourceTitle: params.get("title")!,
