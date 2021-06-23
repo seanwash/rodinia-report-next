@@ -10,13 +10,14 @@ export default function useCreateStory() {
 
       const response = await fetch("/api/stories", {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
           story: {
-            sourceTitle: params.get("title")!,
-            sourceUrl: params.get("sourceUrl")!,
-            sourcePaywalled: false,
-            // TODO: Don't do this, we should get the userId from the session.
-            userId: params.get("userId")!,
+            sourceTitle: params.get("title"),
+            sourceUrl: params.get("sourceUrl"),
+            sourcePaywalled: params.get("sourcePaywalled"),
             topicIds: params.getAll("topicId"),
           },
         }),

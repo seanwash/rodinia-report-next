@@ -1,25 +1,24 @@
-import type { NextApiRequest, NextApiResponse } from "next";
+import type { NextApiResponse } from "next";
 import nc from "next-connect";
 import scraper from "open-graph-scraper";
+import { NextIronRequest, requireUser, session } from "../../../../lib/session";
 
 interface Data {}
 
-export const config = {
-  api: {
-    bodyParser: false, // Disallow body parsing, consume as stream
-  },
-};
+const handler = nc<NextIronRequest, NextApiResponse>();
 
-const handler = nc<NextApiRequest, NextApiResponse>();
+handler
+  .use(session)
+  .use(requireUser)
+  .get(async (req, res) => {
+    const { url } = req.query;
 
-handler.get(async (req, res) => {
-  const { url } = req.query;
-  try {
-    const { result } = await scraper({ url: url as string });
-    return res.json({ metadata: result });
-  } catch (e) {
-    return res.status(500).json(e);
-  }
-});
+    try {
+      const { result } = await scraper({ url: url as string });
+      return res.json({ metadata: result });
+    } catch (e) {
+      return res.status(500).json(e);
+    }
+  });
 
 export default handler;
