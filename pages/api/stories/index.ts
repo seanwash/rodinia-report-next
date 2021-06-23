@@ -37,7 +37,8 @@ handler.use(mult.none()).post(async (req, res) => {
       "createStory",
       params.get("title"),
       params.get("sourceUrl"),
-      params.getAll("topicId")
+      params.getAll("topicId"),
+      params.getAll("topicId").map((id) => ({ id: Number(id) }))
     );
 
     const story = await db.story.create({
