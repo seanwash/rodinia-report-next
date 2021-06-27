@@ -14,6 +14,11 @@ handler.use(session).get(async (req, res) => {
     },
     include: {
       topics: true,
+      reactions: {
+        include: {
+          reactionOption: true,
+        },
+      },
     },
   });
 

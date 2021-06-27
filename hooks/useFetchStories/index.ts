@@ -1,8 +1,8 @@
 import { useQuery } from "react-query";
-import { StoryWithTopics } from "../../lib/db";
+import { StoryWithListEntities } from "../../lib/db";
 
 export default function useFetchStories() {
-  return useQuery<StoryWithTopics[], Error>(["stories"], async () => {
+  return useQuery<StoryWithListEntities[], Error>(["stories"], async () => {
     const request = await fetch("/api/stories");
     const { stories } = await request.json();
     return stories;
