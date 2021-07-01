@@ -33,7 +33,7 @@ const StoryListItem: React.FC<Props> = ({ story }) => {
           </a>
         </h3>
 
-        <div className="flex flex-col sm:flex-row sm:items-center mt-2 sm:space-x-4 leading-5 text-gray-500">
+        <div className="flex flex-col lg:flex-row lg:items-center mt-2 lg:space-x-4 leading-5 text-gray-500">
           <div className="flex items-center space-x-4">
             <div className="flex items-center text-sm">
               <ClockIcon className="h-5 w-5 stroke-current mr-2" />
@@ -47,7 +47,7 @@ const StoryListItem: React.FC<Props> = ({ story }) => {
           </div>
 
           {story.topics.length > 0 && (
-            <ul className="mt-4 sm:mt-0 space-x-2">
+            <ul className="mt-4 lg:mt-0 space-x-2">
               {story.topics.map((topic: Topic) => (
                 <li
                   className="text-xs text-white bg-el-paso rounded-full py-1 px-4 h-7 inline-flex items-center"

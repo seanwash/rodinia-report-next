@@ -51,7 +51,7 @@ const ReactionList: React.FC<Props> = ({ storyId, reactions }) => {
   }
 
   return Object.keys(reactionOptionData).length > 0 ? (
-    <div className="space-x-2 flex items-center">
+    <div className="mt-4 lg:mt-0 space-x-2 flex items-center">
       {Object.entries(reactionOptionData).map(([_name, reactionOption]) => (
         <ReactionButton
           key={reactionOption.id}
