@@ -1,15 +1,15 @@
 import { useMutation, useQueryClient } from "react-query";
 
 interface CreateReactionParams {
-  reactionOptionId: number;
   storyId: number;
+  reactionOptionId: number;
 }
 
 export default function useCreateReaction() {
   const queryClient = useQueryClient();
 
   return useMutation(
-    async ({ reactionOptionId, storyId }: CreateReactionParams) => {
+    async ({ storyId, reactionOptionId }: CreateReactionParams) => {
       const response = await fetch("/api/reactions", {
         method: "POST",
         headers: {
@@ -17,8 +17,8 @@ export default function useCreateReaction() {
         },
         body: JSON.stringify({
           reaction: {
-            reactionOptionId,
             storyId,
+            reactionOptionId,
           },
         }),
       });
