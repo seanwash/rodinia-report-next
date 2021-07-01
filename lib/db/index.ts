@@ -7,6 +7,21 @@ const storyWithTopics = Prisma.validator<Prisma.StoryArgs>()({
 });
 export type StoryWithTopics = Prisma.StoryGetPayload<typeof storyWithTopics>;
 
+const storyWithReactions = Prisma.validator<Prisma.StoryArgs>()({
+  include: {
+    reactions: {
+      include: {
+        reactionOption: true,
+      },
+    },
+  },
+});
+export type StoryWithReactions = Prisma.StoryGetPayload<
+  typeof storyWithReactions
+>;
+
+export type StoryWithListEntities = StoryWithTopics & StoryWithReactions;
+
 // https://github.com/prisma/prisma/issues/5007
 let prisma: PrismaClient;
 if (process.env.NODE_ENV === "production") {
@@ -15,7 +30,9 @@ if (process.env.NODE_ENV === "production") {
   // @ts-ignore
   if (!global.prisma) {
     // @ts-ignore
-    global.prisma = new PrismaClient();
+    global.prisma = new PrismaClient({
+      log: ["query", "info", `warn`, `error`],
+    });
   }
   // @ts-ignore
   prisma = global.prisma;

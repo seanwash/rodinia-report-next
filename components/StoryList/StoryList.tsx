@@ -1,5 +1,5 @@
 import useFetchStories from "../../hooks/useFetchStories";
-import StoryListItem from "../StoryListItem";
+import StoryListItem from "./StoryListItem";
 
 const StoryList: React.FC = () => {
   const { data: stories, isLoading, isError } = useFetchStories();
