@@ -27,6 +27,12 @@
     @apply opacity-50;
 }
 
+/* https://codepen.io/faessler/pen/aRNOEY */
+.twc-with-emoji span {
+    display: inline-block;
+    margin-left: -0.3em;
+}
+
 /* End Components */
 
 @tailwind utilities;

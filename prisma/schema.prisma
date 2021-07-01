@@ -21,7 +21,8 @@ model Story {
   updatedAt       DateTime @updatedAt
   userId          String
 
-  topics Topic[]
+  topics    Topic[]
+  reactions StoryReaction[]
 
   @@index([userId])
 }
@@ -36,4 +37,30 @@ model Topic {
   updatedAt DateTime @updatedAt
 
   stories Story[]
+}
+
+// Reactions --------------------------------------------
+
+model ReactionOption {
+  id            Int             @id @default(autoincrement())
+  name          String          @unique
+  code          String          @unique
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @default(now())
+  StoryReaction StoryReaction[]
+}
+
+model StoryReaction {
+  id Int @id @default(autoincrement())
+
+  reactionOption   ReactionOption @relation(fields: [reactionOptionId], references: [id])
+  reactionOptionId Int
+
+  story   Story? @relation(fields: [storyId], references: [id])
+  storyId Int?
+
+  userId    String
+  createdAt DateTime @default(now())
+
+  @@unique([reactionOptionId, storyId, userId])
 }

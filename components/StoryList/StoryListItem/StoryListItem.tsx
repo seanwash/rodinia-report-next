@@ -1,11 +1,12 @@
-import { ClockIcon, GlobeAltIcon } from "../icons";
-import { StoryWithTopics, Topic } from "../../lib/db";
+import { ClockIcon, GlobeAltIcon } from "../../icons";
+import { StoryWithListEntities, Topic } from "../../../lib/db";
+import ReactionList from "./ReactionList";
 
-interface StoryListItemProps {
-  story: StoryWithTopics;
+interface Props {
+  story: StoryWithListEntities;
 }
 
-const StoryListItem: React.FC<StoryListItemProps> = ({ story }) => {
+const StoryListItem: React.FC<Props> = ({ story }) => {
   const sourceUrl = new URL(story.sourceUrl);
   sourceUrl.searchParams.append("utm_source", "rodinia_report");
   sourceUrl.searchParams.append("ref", "rodinia_report");
@@ -23,7 +24,7 @@ const StoryListItem: React.FC<StoryListItemProps> = ({ story }) => {
       <div className="w-full p-4">
         <h3>
           <a
-            href={story.sourceUrl}
+            href={storyData.sourceUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="hover:underline"
@@ -32,7 +33,7 @@ const StoryListItem: React.FC<StoryListItemProps> = ({ story }) => {
           </a>
         </h3>
 
-        <div className="flex flex-col sm:flex-row sm:items-center mt-2 sm:space-x-4 leading-5 text-gray-500">
+        <div className="flex flex-col lg:flex-row lg:items-center mt-2 lg:space-x-4 leading-5 text-gray-500">
           <div className="flex items-center space-x-4">
             <div className="flex items-center text-sm">
               <ClockIcon className="h-5 w-5 stroke-current mr-2" />
@@ -46,10 +47,10 @@ const StoryListItem: React.FC<StoryListItemProps> = ({ story }) => {
           </div>
 
           {story.topics.length > 0 && (
-            <ul className="mt-4 sm:mt-0 space-x-2">
+            <ul className="mt-4 lg:mt-0 space-x-2">
               {story.topics.map((topic: Topic) => (
                 <li
-                  className="text-xs text-white bg-el-paso inline-block rounded-full py-1 px-2"
+                  className="text-xs text-white bg-el-paso rounded-full py-1 px-4 h-7 inline-flex items-center"
                   key={topic.id}
                 >
                   {topic.name}
@@ -57,6 +58,8 @@ const StoryListItem: React.FC<StoryListItemProps> = ({ story }) => {
               ))}
             </ul>
           )}
+
+          <ReactionList storyId={story.id} reactions={story.reactions} />
         </div>
       </div>
     </div>

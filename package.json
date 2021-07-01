@@ -7,6 +7,8 @@
     "build": "npx prisma generate && npm run migrate:deploy && next build",
     "start": "next start --port ${PORT-3000}",
     "lint": "next lint",
+    "db:studio": "prisma studio",
+    "db:seed": "prisma db seed --preview-feature",
     "migrate:dev": "prisma migrate dev --preview-feature",
     "migrate:deploy": "prisma migrate deploy --preview-feature",
     "migrate:status": "prisma migrate status --preview-feature",
