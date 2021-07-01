@@ -1,6 +1,11 @@
 import Link from "next/link";
 import Head from "next/head";
 import StoryList from "../components/StoryList/StoryList";
+import { QueryClient } from "react-query";
+import { dehydrate } from "react-query/hydration";
+import { prefetchStories } from "../hooks/useFetchStories";
+import { prefetchReactionOptions } from "../hooks/useFetchReactionOptions";
+import { prefetchViewer } from "../hooks/useUser";
 
 const Home = () => {
   return (
@@ -39,3 +44,16 @@ const Home = () => {
 };
 
 export default Home;
+
+export async function getServerSideProps() {
+  const queryClient = new QueryClient();
+  await prefetchStories(queryClient);
+  await prefetchReactionOptions(queryClient);
+  await prefetchViewer(queryClient);
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
+}
