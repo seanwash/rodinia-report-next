@@ -1,5 +1,5 @@
-import useCreateReaction from "../../../hooks/useCreateReaction";
-import useDeleteReaction from "../../../hooks/useDeleteReaction";
+import useCreateReaction from "../../../../../hooks/useCreateReaction";
+import useDeleteReaction from "../../../../../hooks/useDeleteReaction";
 import { AugmentedReactionOption } from "../ReactionList";
 
 interface Props {

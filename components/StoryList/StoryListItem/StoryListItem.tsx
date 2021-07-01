@@ -1,6 +1,6 @@
 import { ClockIcon, GlobeAltIcon } from "../../icons";
 import { StoryWithListEntities, Topic } from "../../../lib/db";
-import ReactionList from "../../ReactionList";
+import ReactionList from "./ReactionList";
 
 interface Props {
   story: StoryWithListEntities;

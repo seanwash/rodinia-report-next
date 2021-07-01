@@ -1,6 +1,6 @@
-import useFetchReactionOptions from "../../hooks/useFetchReactionOptions";
-import useUser from "../../hooks/useUser";
-import { StoryReaction } from "../../lib/db";
+import useFetchReactionOptions from "../../../../hooks/useFetchReactionOptions";
+import useUser from "../../../../hooks/useUser";
+import { StoryReaction } from "../../../../lib/db";
 import ReactionButton from "./ReactionButton";
 
 export type AugmentedReactionOption = {
