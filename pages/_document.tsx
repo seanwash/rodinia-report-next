@@ -1,4 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
+import UmamiTracker from "../components/UmamiTracker";
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: any) {
@@ -13,6 +14,7 @@ class MyDocument extends Document {
         <body className="bg-alabaster">
           <Main />
           <NextScript />
+          <UmamiTracker />
         </body>
       </Html>
     );
