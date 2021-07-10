@@ -1,8 +1,6 @@
-const DESTINATION = Cypress.env("baseUrl");
-
 describe("Home", () => {
   beforeEach(() => {
-    cy.visit(DESTINATION);
+    cy.visit('/');
   });
 
   it("renders the home page", () => {

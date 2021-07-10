@@ -1,8 +1,6 @@
-const DESTINATION = Cypress.env("baseUrl") + "/signup";
-
 describe("Signup", () => {
   beforeEach(() => {
-    cy.visit(DESTINATION);
+    cy.visit('/signup');
   });
 
   it("contains a sign in form", () => {
@@ -23,7 +21,7 @@ describe("Signup", () => {
       cy.get("input[type=password]").type("secretsecret");
       cy.get("button[type=submit]").click();
       cy.location("pathname").should("eq", "/");
-      cy.visit(DESTINATION);
+      cy.visit('/signup');
       cy.location("pathname").should("eq", "/");
     });
   });

@@ -1,5 +1,3 @@
-const DESTINATION = Cypress.env("baseUrl") + "/login";
-
 function signIn() {
   cy.get("input[type=email]").type("hello@seanwash.com");
   cy.get("input[type=password]").type("secretsecret");
@@ -8,7 +6,7 @@ function signIn() {
 
 describe("Login", () => {
   beforeEach(() => {
-    cy.visit(DESTINATION);
+    cy.visit('/login');
   });
 
   it("contains a sign in form", () => {
@@ -32,7 +30,7 @@ describe("Login", () => {
       // walking through the UI.
       signIn();
       cy.location("pathname").should("eq", "/");
-      cy.visit(DESTINATION);
+      cy.visit('/login');
       cy.location("pathname").should("eq", "/");
     });
   });
