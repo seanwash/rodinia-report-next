@@ -20,7 +20,10 @@ const Home = () => {
         />
       </Head>
 
-      <div className="container mx-auto sm:flex items-center justify-between">
+      <div
+        data-cy="homePage"
+        className="container mx-auto sm:flex items-center justify-between"
+      >
         <div className="flex-1 min-w-0">
           <h2 className="text-2xl leading-7 text-el-paso sm:text-3xl sm:leading-9 max-w-4xl">
             The <span className="font-bold">Rodinia Report</span> is a public

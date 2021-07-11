@@ -4,7 +4,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { NextHandler } from "next-connect";
 
 const sessionConfig = {
-  password: process.env.SESSION_SECRET!,
+  password: process.env.SESSION_SECRET || "password",
   cookieName: "TheRodiniaReport",
   cookieOptions: {
     // the next line allows to use the session in non-https environments like
@@ -17,7 +17,7 @@ export type NextIronRequest = NextApiRequest & { session: Session };
 
 export const session = ironSession(sessionConfig);
 
-export default function withSession(handler) {
+export default function withSession(handler: any) {
   return withIronSession(handler, sessionConfig);
 }
 

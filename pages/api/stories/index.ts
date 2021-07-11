@@ -3,11 +3,9 @@ import nc from "next-connect";
 import { db } from "../../../lib/db";
 import { NextIronRequest, requireUser, session } from "../../../lib/session";
 
-interface Data {}
-
 const handler = nc<NextIronRequest, NextApiResponse>();
 
-handler.use(session).get(async (req, res) => {
+handler.use(session).get(async (_req, res) => {
   const stories = await db.story.findMany({
     orderBy: {
       createdAt: "desc",

@@ -1,5 +1,7 @@
 import { PrismaClient, Prisma } from "@prisma/client";
 
+const isDevelopment = process.env.NODE_ENV === "development";
+
 const storyWithTopics = Prisma.validator<Prisma.StoryArgs>()({
   include: {
     topics: true,
@@ -31,7 +33,9 @@ if (process.env.NODE_ENV === "production") {
   if (!global.prisma) {
     // @ts-ignore
     global.prisma = new PrismaClient({
-      log: ["query", "info", `warn`, `error`],
+      log: isDevelopment
+        ? ["query", "info", "warn", "error"]
+        : ["warn", "error"],
     });
   }
   // @ts-ignore
