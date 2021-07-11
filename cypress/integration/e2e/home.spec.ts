@@ -1,6 +1,6 @@
 describe("Home", () => {
   beforeEach(() => {
-    cy.visit('/');
+    cy.visit("/");
   });
 
   it("renders the home page", () => {
@@ -8,5 +8,4 @@ describe("Home", () => {
   });
 });
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default {};
+export {};

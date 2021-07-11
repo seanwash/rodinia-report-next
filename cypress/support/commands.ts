@@ -23,3 +23,37 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+// Must be declared global to be detected by typescript (allows import/export)
+// eslint-disable @typescript/interface-name
+declare global {
+  namespace Cypress {
+    interface Chainable<Subject> {
+      /**
+       * Custom command to log a user in. This will automatically set an auth
+       * cookie just as if the user has signed in via the UI.
+       * @example cy.login()
+       */
+      login(): Chainable<Response<any>>;
+      login({ email, password }: { email: string; password: string }): Chainable<Response<any>>;
+    }
+  }
+}
+
+Cypress.Commands.add("login", ({ email, password } = {}) => {
+  const payload = {
+    email: email || "hello@seanwash.com",
+    password: password || "secretsecret",
+  };
+
+  return cy.request({
+    url: "/api/login",
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+});
+
+export {};
