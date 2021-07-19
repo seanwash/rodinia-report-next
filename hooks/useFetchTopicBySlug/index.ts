@@ -1,8 +1,9 @@
 import { QueryClient, QueryFunctionContext, useQuery } from "react-query";
-import { StoryWithListEntities, Topic } from "../../lib/db";
+import { Topic } from "../../lib/db";
+import { BASE_URL } from "../../lib/constants";
 
 async function fetchTopicBySlug(context: QueryFunctionContext, slug: string) {
-  const request = await fetch(`/api/topics/${slug}`);
+  const request = await fetch(`${BASE_URL}/api/topics/${slug}`);
   const { topic } = await request.json();
   return topic;
 }
