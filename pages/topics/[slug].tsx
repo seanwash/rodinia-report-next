@@ -7,6 +7,7 @@ import { GetServerSideProps, NextPage } from "next";
 import StoryList from "../../components/StoryList";
 import Link from "next/link";
 import useFetchTopicBySlug, { prefetchTopicBySlug } from "../../hooks/useFetchTopicBySlug";
+import Head from "next/head";
 
 interface PageProps {
   slug: string;
@@ -38,22 +39,31 @@ const Slug: NextPage<PageProps> = ({ slug }) => {
   const { data: topic } = useFetchTopicBySlug(slug);
 
   return (
-    <div data-cy="topicSlugPage">
-      <div data-cy="homePage" className="container mx-auto sm:flex items-center justify-between">
-        <div className="flex-1 min-w-0">
-          <h2 className="text-2xl leading-7 text-el-paso sm:text-3xl sm:leading-9 max-w-4xl">Topic: {topic?.name}</h2>
-        </div>
-        <div className="flex mt-4 sm:mt-0 sm:ml-8">
-          <span className="shadow-sm rounded-sm">
-            <Link href="/stories/share">
-              <a className="twc-button">Submit Story</a>
-            </Link>
-          </span>
-        </div>
-      </div>
+    <>
+      <Head>
+        <title>Stories on {topic?.name}</title>
+        <meta property="og:title" content={`Stories on ${topic?.name}`} key="title" />
+      </Head>
 
-      <StoryList slug={slug} />
-    </div>
+      <div data-cy="topicSlugPage">
+        <div data-cy="homePage" className="container mx-auto sm:flex items-center justify-between">
+          <div className="flex-1 min-w-0">
+            <h2 className="text-2xl leading-7 text-el-paso sm:text-3xl sm:leading-9 max-w-4xl">
+              Stories on <strong>{topic?.name}</strong>
+            </h2>
+          </div>
+          <div className="flex mt-4 sm:mt-0 sm:ml-8">
+            <span className="shadow-sm rounded-sm">
+              <Link href="/stories/share">
+                <a className="twc-button">Submit Story</a>
+              </Link>
+            </span>
+          </div>
+        </div>
+
+        <StoryList slug={slug} />
+      </div>
+    </>
   );
 };
 
