@@ -40,6 +40,18 @@ describe("Topics Slug", () => {
     cy.get("[data-cy=topicSlugPage]").should("be.visible");
   });
 
+  it("should include the current topic in document.title", function () {
+    cy.visit("/topics/oceans");
+    cy.title().should("contain", "Oceans");
+    cy.visit("/topics/energy");
+    cy.title().should("contain", "Energy");
+  });
+
+  it("should mention the current topic", function () {
+    cy.visit("/topics/oceans");
+    cy.contains("Stories on Oceans");
+  });
+
   it("should only include stories that belong to the topic", function () {
     cy.visit("/topics/oceans");
     cy.get("[data-cy=storyListItem]").should("have.length", 1);
