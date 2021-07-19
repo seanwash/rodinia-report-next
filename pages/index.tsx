@@ -6,8 +6,22 @@ import { dehydrate } from "react-query/hydration";
 import { prefetchStories } from "../hooks/useFetchStories";
 import { prefetchReactionOptions } from "../hooks/useFetchReactionOptions";
 import { prefetchViewer } from "../hooks/useUser";
+import { NextPage } from "next";
 
-const Home = () => {
+export async function getServerSideProps() {
+  const queryClient = new QueryClient();
+  await prefetchStories(queryClient);
+  await prefetchReactionOptions(queryClient);
+  await prefetchViewer(queryClient);
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
+}
+
+const Home: NextPage = () => {
   return (
     <>
       <Head>
@@ -20,16 +34,12 @@ const Home = () => {
         />
       </Head>
 
-      <div
-        data-cy="homePage"
-        className="container mx-auto sm:flex items-center justify-between"
-      >
+      <div data-cy="homePage" className="container mx-auto sm:flex items-center justify-between">
         <div className="flex-1 min-w-0">
           <h2 className="text-2xl leading-7 text-el-paso sm:text-3xl sm:leading-9 max-w-4xl">
-            The <span className="font-bold">Rodinia Report</span> is a public
-            curation of environmentally focused articles that helps individuals
-            easily stay up to date on the most recent and most inspiring
-            undertakings around the world.
+            The <span className="font-bold">Rodinia Report</span> is a public curation of environmentally focused
+            articles that helps individuals easily stay up to date on the most recent and most inspiring undertakings
+            around the world.
           </h2>
         </div>
         <div className="flex mt-4 sm:mt-0 sm:ml-8">
@@ -47,16 +57,3 @@ const Home = () => {
 };
 
 export default Home;
-
-export async function getServerSideProps() {
-  const queryClient = new QueryClient();
-  await prefetchStories(queryClient);
-  await prefetchReactionOptions(queryClient);
-  await prefetchViewer(queryClient);
-
-  return {
-    props: {
-      dehydratedState: dehydrate(queryClient),
-    },
-  };
-}

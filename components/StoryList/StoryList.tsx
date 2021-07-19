@@ -1,8 +1,12 @@
 import useFetchStories from "../../hooks/useFetchStories";
 import StoryListItem from "./StoryListItem";
 
-const StoryList: React.FC = () => {
-  const { data: stories, isLoading, isError } = useFetchStories();
+interface Props {
+  slug?: string;
+}
+
+const StoryList: React.FC<Props> = ({ slug }) => {
+  const { data: stories, isLoading, isError } = useFetchStories({ topic: slug });
 
   if (isLoading) {
     return <div>Loading...</div>;
