@@ -1,6 +1,7 @@
 import { ClockIcon, GlobeAltIcon } from "../../icons";
 import { StoryWithListEntities, Topic } from "../../../lib/db";
 import ReactionList from "./ReactionList";
+import Link from "next/link";
 
 interface Props {
   story: StoryWithListEntities;
@@ -20,15 +21,10 @@ const StoryListItem: React.FC<Props> = ({ story }) => {
   };
 
   return (
-    <div className="flex items-center space-x-4">
+    <div data-cy="storyListItem" className="flex items-center space-x-4">
       <div className="w-full p-4">
         <h3>
-          <a
-            href={storyData.sourceUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:underline"
-          >
+          <a href={storyData.sourceUrl} target="_blank" rel="noopener noreferrer" className="hover:underline">
             {story.sourceTitle}
           </a>
         </h3>
@@ -49,11 +45,15 @@ const StoryListItem: React.FC<Props> = ({ story }) => {
           {story.topics.length > 0 && (
             <ul className="mt-4 lg:mt-0 space-x-2">
               {story.topics.map((topic: Topic) => (
-                <li
-                  className="text-xs text-white bg-el-paso rounded-full py-1 px-4 h-7 inline-flex items-center"
-                  key={topic.id}
-                >
-                  {topic.name}
+                <li key={topic.id}>
+                  <Link href={`/topics/${topic.slug}`}>
+                    <a
+                      data-cy="topicLink"
+                      className="text-xs text-white bg-el-paso rounded-full py-1 px-4 h-7 inline-flex items-center"
+                    >
+                      {topic.name}
+                    </a>
+                  </Link>
                 </li>
               ))}
             </ul>
