@@ -90,25 +90,29 @@ async function seed() {
 
   // Stories -------------------------------------------
   try {
-    await db.story.createMany({
-      data: [
-        {
-          sourceTitle:
-            "'Powerful signal': In a single day, Big Oil suffers historic blows on climate",
-          sourceUrl:
-            "https://www.politico.com/news/2021/05/26/big-oil-exxon-climate-491104?edf=860",
-          sourcePaywalled: false,
-          userId: "123", // How to grab this from FB?,
+    await db.story.create({
+      data: {
+        sourceTitle: "'Powerful signal': In a single day, Big Oil suffers historic blows on climate",
+        sourceUrl: "https://www.politico.com/news/2021/05/26/big-oil-exxon-climate-491104?edf=860",
+        sourcePaywalled: false,
+        userId: "123", // How to grab this from FB?,
+        topics: {
+          connect: [{ id: 1 }, { id: 2 }],
         },
-        {
-          sourceTitle:
-            "Shell ordered to cut CO2 emissions by 45% in landmark climate case",
-          sourceUrl:
-            "https://www.euronews.com/green/2021/05/26/shell-ordered-to-cut-co2-emissions-by-45-in-landmark-climate-case",
-          sourcePaywalled: false,
-          userId: "123", // How to grab this from FB?
+      },
+    });
+
+    await db.story.create({
+      data: {
+        sourceTitle: "Shell ordered to cut CO2 emissions by 45% in landmark climate case",
+        sourceUrl:
+          "https://www.euronews.com/green/2021/05/26/shell-ordered-to-cut-co2-emissions-by-45-in-landmark-climate-case",
+        sourcePaywalled: false,
+        userId: "123", // How to grab this from FB?
+        topics: {
+          connect: [{ id: 3 }, { id: 4 }],
         },
-      ],
+      },
     });
   } catch (e) {
     console.log("--------", "Failed to create Stories:", e);

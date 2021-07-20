@@ -10,6 +10,7 @@
     "db:studio": "prisma studio",
     "db:seed": "node -r dotenv-flow/config node_modules/.bin/prisma db seed --preview-feature",
     "migrate:dev": "node -r dotenv-flow/config node_modules/.bin/prisma migrate dev --preview-feature",
+    "migrate:reset": "node -r dotenv-flow/config node_modules/.bin/prisma migrate reset --preview-feature",
     "migrate:deploy": "prisma migrate deploy --preview-feature",
     "migrate:status": "prisma migrate status --preview-feature",
     "firebase:emulators": "firebase emulators:start",
