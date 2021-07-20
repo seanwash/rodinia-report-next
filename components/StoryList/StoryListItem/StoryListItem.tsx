@@ -45,11 +45,11 @@ const StoryListItem: React.FC<Props> = ({ story }) => {
           {story.topics.length > 0 && (
             <ul className="mt-4 lg:mt-0 space-x-2">
               {story.topics.map((topic: Topic) => (
-                <li key={topic.id}>
+                <li key={topic.id} className="inline-flex items-center">
                   <Link href={`/topics/${topic.slug}`}>
                     <a
                       data-cy="topicLink"
-                      className="text-xs text-white bg-el-paso rounded-full py-1 px-4 h-7 inline-flex items-center"
+                      className="text-xs text-white flex items-center bg-el-paso rounded-full py-1 px-4 h-7"
                     >
                       {topic.name}
                     </a>
