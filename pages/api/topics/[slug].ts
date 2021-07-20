@@ -3,13 +3,15 @@ import { db } from "../../../lib/db";
 import nc from "next-connect";
 
 const handler = nc<NextApiRequest, NextApiResponse>().get(async (req, res) => {
-  const topics = await db.topic.findMany({
-    orderBy: {
-      name: "asc",
+  const { slug } = req.query;
+
+  const topic = await db.topic.findFirst({
+    where: {
+      slug: slug as string,
     },
   });
 
-  return res.json({ topics });
+  return res.json({ topic });
 });
 
 export default handler;

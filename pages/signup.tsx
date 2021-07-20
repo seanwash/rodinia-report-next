@@ -31,7 +31,12 @@ export default function SignUp() {
         </div>
       )}
 
-      <form onSubmit={handleSubmit} method="post" className="space-y-4">
+      <form
+        data-cy="signupForm"
+        onSubmit={handleSubmit}
+        method="post"
+        className="space-y-4"
+      >
         <div>
           <input
             type="email"

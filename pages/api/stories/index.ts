@@ -1,14 +1,14 @@
 import type { NextApiResponse } from "next";
 import nc from "next-connect";
-import { db } from "../../../lib/db";
+import { db, Prisma } from "../../../lib/db";
 import { NextIronRequest, requireUser, session } from "../../../lib/session";
-
-interface Data {}
 
 const handler = nc<NextIronRequest, NextApiResponse>();
 
 handler.use(session).get(async (req, res) => {
-  const stories = await db.story.findMany({
+  const { topic }: { topic?: string } = req.query;
+
+  let createStoryArgs: Prisma.StoryFindManyArgs = {
     orderBy: {
       createdAt: "desc",
     },
@@ -20,7 +20,22 @@ handler.use(session).get(async (req, res) => {
         },
       },
     },
-  });
+  };
+
+  if (topic) {
+    createStoryArgs = {
+      ...createStoryArgs,
+      where: {
+        topics: {
+          some: {
+            slug: topic,
+          },
+        },
+      },
+    };
+  }
+
+  const stories = await db.story.findMany(createStoryArgs);
 
   return res.json({ stories });
 });

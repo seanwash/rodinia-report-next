@@ -31,7 +31,12 @@ export default function Login() {
         </div>
       )}
 
-      <form onSubmit={handleSubmit} method="post" className="space-y-4">
+      <form
+        data-cy="loginForm"
+        onSubmit={handleSubmit}
+        method="post"
+        className="space-y-4"
+      >
         <div>
           <input
             type="email"

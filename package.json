@@ -8,14 +8,21 @@
     "start": "next start --port ${PORT-3000}",
     "lint": "next lint",
     "db:studio": "prisma studio",
-    "db:seed": "prisma db seed --preview-feature",
-    "migrate:dev": "prisma migrate dev --preview-feature",
+    "db:seed": "node -r dotenv-flow/config node_modules/.bin/prisma db seed --preview-feature",
+    "migrate:dev": "node -r dotenv-flow/config node_modules/.bin/prisma migrate dev --preview-feature",
+    "migrate:reset": "node -r dotenv-flow/config node_modules/.bin/prisma migrate reset --preview-feature",
     "migrate:deploy": "prisma migrate deploy --preview-feature",
     "migrate:status": "prisma migrate status --preview-feature",
-    "firebase:emulators": "firebase emulators:start"
+    "firebase:emulators": "firebase emulators:start",
+    "test": "cypress:run",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "cypress:ci": "start-server-and-test dev 3000 cypress:run"
   },
   "dependencies": {
     "@prisma/client": "^2.25.0",
+    "cypress": "^7.6.0",
+    "dotenv-flow": "^3.2.0",
     "firebase": "^8.6.8",
     "firebase-admin": "^9.9.0",
     "multer": "^1.4.2",
@@ -29,15 +36,19 @@
     "react-query": "^3.17.2"
   },
   "devDependencies": {
+    "@types/mocha": "^8.2.3",
     "@types/multer": "^1.4.6",
     "@types/open-graph-scraper": "^4.8.0",
     "@types/react": "17.0.11",
     "autoprefixer": "^10.2.6",
     "eslint": "7.28.0",
     "eslint-config-next": "11.0.0",
+    "eslint-plugin-cypress": "^2.11.3",
+    "fishery": "^1.4.0",
     "postcss": "^8.3.5",
     "prettier": "^2.3.1",
     "prisma": "^2.25.0",
+    "start-server-and-test": "^1.12.6",
     "tailwindcss": "^2.2.0",
     "typescript": "4.3.4"
   }
