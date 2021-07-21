@@ -8,7 +8,7 @@ interface PageQuery extends ParsedUrlQuery {
   id: string;
 }
 
-export const getServerSideProps: GetServerSideProps<PageProps, PageQuery> = async ({ params, req }) => {
+export const getServerSideProps: GetServerSideProps<PageProps, PageQuery> = async ({ params }) => {
   const id = params?.id as string;
   const story = await db.story.findFirst({
     where: {
@@ -22,15 +22,24 @@ export const getServerSideProps: GetServerSideProps<PageProps, PageQuery> = asyn
     };
   }
 
+  await db.story.update({
+    where: {
+      id: Number(id),
+    },
+    data: {
+      permalinkHitCount: {
+        increment: 1,
+      },
+    },
+  });
+
   const destination = new URL(story.sourceUrl);
   destination.searchParams.append("ref", "rodinia_report");
-
-  // TODO: Track whatever metrics we want here + increment a counter cache.
 
   return {
     redirect: {
       destination: destination.toString(),
-      statusCode: 301,
+      statusCode: 302,
     },
   };
 };
