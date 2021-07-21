@@ -24,7 +24,7 @@ const StoryListItem: React.FC<Props> = ({ story }) => {
     <div data-cy="storyListItem" className="flex items-center space-x-4">
       <div className="w-full p-4">
         <h3>
-          <a href={storyData.sourceUrl} target="_blank" rel="noopener noreferrer" className="hover:underline">
+          <a href={`/s/${story.id}`} target="_blank" rel="noopener noreferrer" className="hover:underline">
             {story.sourceTitle}
           </a>
         </h3>

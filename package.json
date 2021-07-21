@@ -9,6 +9,7 @@
     "lint": "next lint",
     "db:studio": "prisma studio",
     "db:seed": "node -r dotenv-flow/config node_modules/.bin/prisma db seed --preview-feature",
+    "db:push": "node -r dotenv-flow/config node_modules/.bin/prisma db push",
     "migrate:dev": "node -r dotenv-flow/config node_modules/.bin/prisma migrate dev --preview-feature",
     "migrate:reset": "node -r dotenv-flow/config node_modules/.bin/prisma migrate reset --preview-feature",
     "migrate:deploy": "prisma migrate deploy --preview-feature",
@@ -21,7 +22,6 @@
   },
   "dependencies": {
     "@prisma/client": "^2.25.0",
-    "cypress": "^7.6.0",
     "dotenv-flow": "^3.2.0",
     "firebase": "^8.6.8",
     "firebase-admin": "^9.9.0",
@@ -38,9 +38,11 @@
   "devDependencies": {
     "@types/mocha": "^8.2.3",
     "@types/multer": "^1.4.6",
+    "@types/node": "^16.4.0",
     "@types/open-graph-scraper": "^4.8.0",
     "@types/react": "17.0.11",
     "autoprefixer": "^10.2.6",
+    "cypress": "^8.0.0",
     "eslint": "7.28.0",
     "eslint-config-next": "11.0.0",
     "eslint-plugin-cypress": "^2.11.3",
