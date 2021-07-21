@@ -36,7 +36,7 @@ export const getServerSideProps: GetServerSideProps<PageProps, PageQuery> = asyn
 };
 
 const S: NextPage<PageProps> = () => {
-  return <div>Redirecting..</div>;
+  return <div>Redirecting...</div>;
 };
 
 export default S;
