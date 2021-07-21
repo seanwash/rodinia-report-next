@@ -21,6 +21,8 @@ model Story {
   updatedAt       DateTime @updatedAt
   userId          String
 
+  permalinkHitCount Int @default(0)
+
   topics    Topic[]
   reactions StoryReaction[]
 

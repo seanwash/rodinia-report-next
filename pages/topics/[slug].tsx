@@ -8,13 +8,13 @@ import StoryList from "../../components/StoryList";
 import Link from "next/link";
 import useFetchTopicBySlug, { prefetchTopicBySlug } from "../../hooks/useFetchTopicBySlug";
 import Head from "next/head";
+import { ParsedUrlQuery } from "querystring";
 
 interface PageProps {
   slug: string;
 }
 
-interface ServerQuery {
-  [key: string]: string | string[];
+interface ServerQuery extends ParsedUrlQuery {
   slug: string;
 }
 
