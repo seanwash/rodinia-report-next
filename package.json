@@ -9,6 +9,7 @@
     "lint": "next lint",
     "db:studio": "prisma studio",
     "db:seed": "node -r dotenv-flow/config node_modules/.bin/prisma db seed --preview-feature",
+    "db:push": "node -r dotenv-flow/config node_modules/.bin/prisma db push",
     "migrate:dev": "node -r dotenv-flow/config node_modules/.bin/prisma migrate dev --preview-feature",
     "migrate:reset": "node -r dotenv-flow/config node_modules/.bin/prisma migrate reset --preview-feature",
     "migrate:deploy": "prisma migrate deploy --preview-feature",
