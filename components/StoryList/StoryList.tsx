@@ -19,7 +19,7 @@ const StoryList: React.FC<Props> = ({ slug }) => {
   return (
     <ul className="bg-alabaster-300 shadow-sm rounded-sm divide-y divide-alabaster mt-8">
       {stories?.map((story) => (
-        <li key={story.id}>
+        <li key={story.id} className="overflow-x-auto">
           <StoryListItem story={story} />
         </li>
       ))}
