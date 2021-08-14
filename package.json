@@ -21,7 +21,7 @@
     "cypress:ci": "start-server-and-test dev 3000 cypress:run"
   },
   "dependencies": {
-    "@prisma/client": "^2.25.0",
+    "@prisma/client": "^2.29.1",
     "dotenv-flow": "^3.2.0",
     "firebase": "^8.6.8",
     "firebase-admin": "^9.9.0",
@@ -49,7 +49,7 @@
     "fishery": "^1.4.0",
     "postcss": "^8.3.5",
     "prettier": "^2.3.1",
-    "prisma": "^2.25.0",
+    "prisma": "^2.29.1",
     "start-server-and-test": "^1.12.6",
     "tailwindcss": "^2.2.0",
     "typescript": "4.3.4"
