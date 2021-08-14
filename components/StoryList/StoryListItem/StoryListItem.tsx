@@ -1,7 +1,8 @@
-import { ClockIcon, GlobeAltIcon } from "../../icons";
+import { ClockIcon, GlobeAltIcon, ShareIcon } from "../../icons";
 import { StoryWithListEntities, Topic } from "../../../lib/db";
 import ReactionList from "./ReactionList";
 import Link from "next/link";
+import CopyLinkButton from "./CopyLinkButton";
 
 interface Props {
   story: StoryWithListEntities;
@@ -31,6 +32,8 @@ const StoryListItem: React.FC<Props> = ({ story }) => {
 
         <div className="flex flex-col lg:flex-row lg:items-center mt-2 lg:space-x-4 leading-5 text-gray-500">
           <div className="flex items-center space-x-4">
+            <CopyLinkButton storyId={story.id} />
+
             <div className="flex items-center text-sm">
               <ClockIcon className="h-5 w-5 stroke-current mr-2" />
               <span>{storyData.createdAt}</span>
