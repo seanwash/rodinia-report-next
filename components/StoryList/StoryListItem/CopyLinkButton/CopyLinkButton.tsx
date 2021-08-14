@@ -25,7 +25,7 @@ const CopyLinkButton: React.FC<Props> = ({ storyId }) => {
   return (
     <button type="button" onClick={handleClick} className="flex items-center text-sm">
       <ShareIcon className="h-5 w-5 stroke-current mr-2" />
-      <span>{buttonText}</span>{" "}
+      <span className="whitespace-nowrap">{buttonText}</span>{" "}
     </button>
   );
 };
