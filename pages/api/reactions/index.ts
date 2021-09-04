@@ -23,7 +23,6 @@ handler
     try {
       // TODO: Would be nice to validate the incoming data.
       const { reaction: reactionData } = req.body;
-      console.log("--------", "", reactionData);
 
       const reaction = await db.storyReaction.create({
         data: {
